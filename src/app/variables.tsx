@@ -1,0 +1,1 @@
+export const apiUrl = "https://edmrest.dev.burworld.ru/Universal"

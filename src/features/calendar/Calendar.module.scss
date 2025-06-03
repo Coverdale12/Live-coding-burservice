@@ -1,0 +1,13 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  --cal-color-primary: #000000;
+--cal-font-family-header: "Work Sans", sans-serif;
+--cal-font-family-weekdays: "Work Sans", sans-serif;
+--cal-font-family-body: "Work Sans", sans-serif;
+--cal-drop-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+--cal-border: none;
+--cal-border-radius: 0.5rem;
+--cal-header-color: rgb(241, 0, 0);
+--cal-weekdays-color: black;
+}

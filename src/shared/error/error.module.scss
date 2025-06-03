@@ -1,0 +1,20 @@
+@keyframes spawn-error {
+  0%{
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.error{
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  color: red;
+  font-size: 2.1rem;
+  animation: spawn-error 1s ease-in forwards;
+}

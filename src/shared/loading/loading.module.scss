@@ -1,0 +1,31 @@
+@keyframes loading-animation {
+  0%{
+    content: ".";
+    opacity: 1;
+  }
+  25%{
+    opacity: 0.2;
+  }
+  50%{
+    content: "..";
+    opacity: 1;
+  }
+  75%{
+    opacity: 0.2;
+  }
+  100%{
+    opacity: 1;
+    content: "...";
+  }
+}
+.loading{
+  display: flex;
+  justify-content:  center;
+  margin: auto;
+  font-size: 3rem;
+  animation: loading-animation 2s linear infinite;
+  &::after{
+    content: ".";
+    animation: loading-animation 2s linear infinite;
+  }
+}

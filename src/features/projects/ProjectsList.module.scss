@@ -1,0 +1,21 @@
+.list{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  list-style-type: none;
+  gap: 0.5rem;
+  margin-inline: 1rem;
+  padding: 0;
+  @media screen and (width < 48.75rem) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.error{
+  color: red;
+}
+.loading{
+  display: flex;
+  width: 100%;
+  font-size: 2rem;
+  justify-content: center;
+}

@@ -1,0 +1,17 @@
+.sites{
+  
+}
+.title{
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.wells{
+  &__list{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0 1rem;
+    row-gap: 1rem;
+  }
+}

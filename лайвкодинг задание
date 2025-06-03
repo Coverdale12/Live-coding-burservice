@@ -1,0 +1,85 @@
+1) создать typescript приложение на react 
+2) внедрить рест апи 
+3) добавить middleware перехвата ошибок 
+4) внедрить библиотеку mui 
+5) добавить динамический роутинг 
+
+Описание страницы: 
+1) 	Меню состоит из названий Месторождений 
+	api получения данных:https://edmrest.emeryone.com/Universal/CdProjectSource?fields=projectName,projectId
+	При клике на Месторождение заполняется информация согласно этому месторождению 
+2)  Календарь по умолчанию текущая дата 
+3)  Блок скважин: показываются все скважины месторождения в виде карусели, если больше 3
+
+	Месторождение [projectId] - куст [siteId] - скважина [wellId] - ствол [wellboreId] - мероприятия [eventId]
+
+	api получения кустов sites = https://edmrest.emeryone.com/Universal/CdSiteSource/projectId/$projectId/?fields=projectId,siteId,siteName
+	api получения скважин wells = https://edmrest.emeryone.com/Universal/CdWellSource/siteId/$sitesIds/?fields=siteId,wellCommonName,wellId,spudDate,reason
+	$sitesIds = siteId через запятую (например 7PoSPdsisk,C2CRrk8Geh)
+	
+	Выбранную скважину подсветить обводкой (как на рисунке)
+
+	Карточка скважины:
+	1) Куст: {site.siteName}
+	2) Скважина: {well.wellCommonName}
+	3) {well.reason}
+	4) Дата забуривания: {well.spudDate}
+	5) 	Получение списка мероприятий 
+		api https://edmrest.emeryone.com/Universal/DmEventT/wellId/$wellId/?fields=wellId,eventId,eventCode
+
+		кнопки фильтруют блок "Отчеты" по мероприятию - список отчетов если загружен, фильтруется по eventId
+		возможен множественный выбор
+    6) Кнопка "План" фильтрует отчет по Типу - список отчетов если загружен, фильтруется по reportAlias='GEN_PLAN'
+	7) Кнопка "Все отчеты" убирает фильтры     
+
+
+4) 	Блок "Отчеты"
+	Таблица отчетов с фильтрами по выбранной скважине, по умолчанию загружается информация по первой в каруселе скважине
+
+	Сортировка по умолчанию по дате, вверху самая свежая дата 
+
+	столбцы: 
+		а) Тип - reoprtAlias, показываем название соответствующее коду 
+
+			const reports = [
+				{ type: 'Суточный', alias: 'DDR' },
+				{ type: 'Крепление', alias: 'CASING' },
+				{ type: 'Цнементирование', alias: 'GEN_CMT' },
+				{ type: 'Планирование', alias: 'GEN_PLAN' },
+			]
+
+		б) дата - dateReport
+		в) № - reportNo
+		г) Описание - description
+		д) Мероприятие - entityType
+
+	api получения отчетов - https://edmrest.emeryone.com/Universal/DmReportJournal/wellId/{wellId}/?fields=eventCode,reportJournalId,wellId,wellboreId,dateReport,eventId,reportAlias,description,entityType,reportNo
+
+	api получения отчетов по мероприятию
+	https://edmrest.emeryone.com/Universal/DmReportJournal/wellId/636Znb6AdT/eventId/$eventIds?fields=eventCode,reportJournalId,wellId,wellboreId,dateReport,eventId,reportAlias,description,entityType,reportNo
+	$eventIds = eventId через запятую (например PdGvH,PdddH)
+
+	api получения отчетов по Типу "План"
+	https://edmrest.emeryone.com/Universal/DmReportJournal/wellId/636Znb6AdT/reportAlias/GEN_PLAN/?fields=eventCode,reportJournalId,wellId,wellboreId,dateReport,eventId,reportAlias,description,entityType,reportNo
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+4) информация о месторождении должна включать карточки кустов
+Кусты можно получить следующим образом: 
+	1) 
+	2) 
+
+
+
+https://edmrest.emeryone.com/Universal/CdSiteSource/?fields=siteId

@@ -1,0 +1,14 @@
+.site{
+  width: 100%;
+  background-color: yellowgreen;
+  border-radius: 0.8rem;
+  padding: 0.5rem 1rem;
+}
+.list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  list-style-type: none;
+  padding: 0;
+  margin-inline: 0.8rem;
+}
