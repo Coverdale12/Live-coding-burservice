@@ -14,4 +14,12 @@
     padding: 0 1rem;
     row-gap: 1rem;
   }
+  &__title-list{
+    font-size: 1rem;
+    color: gray;
+    display: flex;
+    margin-inline: 1rem;
+    padding: 0.3rem;
+    padding-block: 0;
+  }
 }

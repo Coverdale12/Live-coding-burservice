@@ -31,7 +31,7 @@ export default function SitesList({ projectId, setSites }: SitesListProps) {
         <li className={styles.item} key={index}>
           <Site siteData={el} />
         </li>
-      )) : "Кустов нету("}
+      )) : <p className={styles.warning}>Кусты по запросу не найденны!</p>}
     </ul>
   )
 }

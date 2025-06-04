@@ -18,7 +18,7 @@ const StyledCarousel = styled.div`
     align-items: center;
     position: relative;
     width: 100%;
-    margin: 1rem auto;
+    margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
     border: 0.3rem solid var(--color-brown-dark);
@@ -41,9 +41,6 @@ const StyledCarousel = styled.div`
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     transition: transform 0.3s ease;
-  }
-  .swiper-slide:hover {
-    transform: scale(1.02);
   }
   .swiper:hover [class*="swiper-button"]{
     background-color: var(--color-brown-dark);
@@ -116,22 +113,23 @@ export default function Wells() {
     enabled: isEnabled,
   });
 
-  if (!isEnabled) return <div className={loadingStyle.loading}>Ожидание данных...</div>;
+  if (!isEnabled) return <div className={loadingStyle.loading}>Ожидание данных</div>;
 
   if (error) return <div className={errorStyle.error}>{error.message}</div>
 
   if (isLoading) return <div className={loadingStyle.loading}>Загрузка</div>
 
-  return (
-    <StyledCarousel>
-      <section className="wells">
-        <h2 className={styles.title}>Скважины</h2>
+
+  function WellsList() {
+    if (!data) return
+    console.log(data)
+    if (data?.length >= 3) return (
+      <>
+        <h3 className={styles["wells__title-list"]}>
+          Найденно {data.length} скважин
+        </h3>
         <ul className={styles.wells__list}>
-          {data && data.length > 3 ? data?.map((el, index) => (
-            <li className="wells__item" key={index}>
-              <WellsCard wellsData={el} />
-            </li>
-          )) : <Swiper
+          {data && <Swiper
             modules={[Pagination, Navigation]}
             spaceBetween={50}
             slidesPerView={1}
@@ -143,6 +141,23 @@ export default function Wells() {
             ))}
           </Swiper>}
         </ul>
+      </>
+    )
+    return (
+      <ul className={styles.wells__list}>
+        {data && data?.map((el, index) => (
+          <li className="wells__item" key={index}>
+            <WellsCard wellsData={el}/>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  return (
+    <StyledCarousel>
+      <section className="wells">
+        <h2 className={styles.title}>Скважины</h2>
+        <WellsList />
       </section >
     </StyledCarousel>
   );
