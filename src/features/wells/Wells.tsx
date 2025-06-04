@@ -1,8 +1,8 @@
-import { useFetchEvents } from "@features/events/api/fetchProjects"
+import { useFetchEvents } from "@features/events/api/fetchEvents"
 
 
-import errorStyle from "@shared/error/error.module.scss"
-import loadingStyle from "@shared/loading/loading.module.scss"
+import Loading from "@shared/loading/Loading"
+import ErrorComponent from "@shared/error/ErrorComponent"
 
 import styles from "./WellsStyle.module.scss"
 
@@ -22,8 +22,8 @@ export interface Wells {
 function EventsList({ wellId }: { wellId: string }) {
   const { data, error, isLoading } = useFetchEvents(wellId);
 
-  if (error) return <div className={errorStyle.error}>Ошибка: {error.message}</div>
-  if (isLoading) return <div className={loadingStyle.loading}>Загрузка мероприятий</div>
+  if (error) return <ErrorComponent>{error}</ErrorComponent>
+  if (isLoading) return <Loading>Загрузка мероприятий</Loading>
 
   return (
     <>
@@ -38,12 +38,16 @@ function EventsList({ wellId }: { wellId: string }) {
   )
 }
 
-export default function WellsCard({ wellsData }: { wellsData: Wells }) {
-  const { wellId, spudDate, reason, wellCommonName } = wellsData
+type WellsExtend = Wells & {
+  siteName?: string;
+}
+
+export default function WellsCard({ wellsData }: { wellsData: WellsExtend}) {
+  const { wellId, spudDate, reason, wellCommonName, siteName } = wellsData
 
   return (
     <article className={styles.card} id={wellId}>
-      <p className={styles.card__param}>Куст: имя куста</p>
+      <p className={styles.card__param}>Куст: {siteName}</p>
       <p className={styles.card__param}>Скважина: {wellCommonName}</p>
       <p className={styles.card__param}>Направление: {reason}</p>
       {spudDate && <p className={styles.card__param}>Дата забуривания: {spudDate}</p>}

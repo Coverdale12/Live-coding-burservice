@@ -16,5 +16,9 @@
   opacity: 0;
   color: red;
   font-size: 2.1rem;
+  text-align: center;
+  @media screen and (width < 48.75rem) {
+    font-size: clamp(1.6rem, 4.3vw ,2.1rem);
+  }
   animation: spawn-error 1s ease-in forwards;
 }

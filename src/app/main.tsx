@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 
 
 // Providers
-import ReactRouter from './Providers/ReactRouterProvider.tsx'
-import ReactQueryProvider from './Providers/ReactQueryProvider.tsx'
-import MuiThemeProvider from './Providers/MuiThemeProvider.tsx'
+import ReactRouter from './providers/ReactRouterProvider.tsx'
+import ReactQueryProvider from './providers/ReactQueryProvider.tsx'
+import MuiThemeProvider from './providers/MuiThemeProvider.tsx'
 
-import "./global.scss"
+import "./global/global.scss"
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(

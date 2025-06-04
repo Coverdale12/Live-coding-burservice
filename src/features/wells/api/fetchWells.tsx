@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiUrl } from '@app/variables';
+import { apiUrl } from '@app/global/variables';
 import { useQuery } from '@tanstack/react-query';
 import { Wells } from "../Wells"
 

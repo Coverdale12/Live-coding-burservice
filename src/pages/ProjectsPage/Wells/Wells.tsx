@@ -1,8 +1,10 @@
 import { useFetchWells } from "@features/wells/api/fetchWells";
 import { useSitesContext } from "../SitesContext/SitesProvider";
 import WellsCard from "@features/wells/Wells";
-import errorStyle from "@shared/error/error.module.scss"
-import loadingStyle from "@shared/loading/loading.module.scss"
+
+import ErrorComponent from "@shared/error/ErrorComponent";
+import Loading from "@shared/loading/Loading";
+
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper/modules";
@@ -10,6 +12,8 @@ import { Pagination, Navigation } from "swiper/modules";
 import styled from "styled-components";
 
 import styles from "../Project.module.scss"
+
+
 
 const StyledCarousel = styled.div`
   .swiper {
@@ -100,9 +104,8 @@ const StyledCarousel = styled.div`
     }
   }`
 
-
 export default function Wells() {
-  const { sitesId } = useSitesContext();
+  const { sitesId, sites } = useSitesContext();
 
   const isEnabled = Boolean(
     sitesId &&
@@ -113,16 +116,15 @@ export default function Wells() {
     enabled: isEnabled,
   });
 
-  if (!isEnabled) return <div className={loadingStyle.loading}>Ожидание данных</div>;
+  if (!isEnabled) return <Loading>Ожидание данных</Loading>
 
-  if (error) return <div className={errorStyle.error}>{error.message}</div>
+  if (error) return <ErrorComponent>{error}</ErrorComponent>
 
-  if (isLoading) return <div className={loadingStyle.loading}>Загрузка</div>
+  if (isLoading) return <Loading>Загрузка скважин</Loading>
 
 
   function WellsList() {
     if (!data) return
-    console.log(data)
     if (data?.length >= 3) return (
       <>
         <h3 className={styles["wells__title-list"]}>
@@ -134,6 +136,14 @@ export default function Wells() {
             spaceBetween={50}
             slidesPerView={1}
             pagination={{ clickable: true }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              }
+            }}
             navigation> {data?.map((el, index) => (
               <SwiperSlide>
                 <WellsCard wellsData={el} key={index} />
@@ -147,7 +157,7 @@ export default function Wells() {
       <ul className={styles.wells__list}>
         {data && data?.map((el, index) => (
           <li className="wells__item" key={index}>
-            <WellsCard wellsData={el}/>
+            <WellsCard wellsData={el} />
           </li>
         ))}
       </ul>

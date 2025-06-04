@@ -3,8 +3,10 @@ import Site from "./Site";
 import { useEffect } from "react";
 import styles from "./SiteStyles.module.scss"
 
-import loadingStyle from "@shared/loading/loading.module.scss"
-import errorStyle from "@shared/error/error.module.scss"
+
+
+import Loading from "@shared/loading/Loading";
+import ErrorComponent from "@shared/error/ErrorComponent";
 
 
 type SitesListProps = {
@@ -22,8 +24,8 @@ export default function SitesList({ projectId, setSites }: SitesListProps) {
       setSites(sitesIds)
     }
   }, [data, setSites])
-  if (isLoading) return <div className={loadingStyle.loading}>Загрузка</div>
-  if (error) return <div className={errorStyle.error}>{error.message}</div>
+  if (isLoading) return <Loading>Загрузка кустов</Loading>
+  if (error) return <ErrorComponent>{error}</ErrorComponent>
   
   return (
     <ul className={styles.list}>

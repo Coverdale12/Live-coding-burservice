@@ -1,5 +1,5 @@
 import styles from "./Events.module.scss"
-import { Events } from "./api/fetchProjects"
+import { Events } from "./api/fetchEvents"
 
 
 

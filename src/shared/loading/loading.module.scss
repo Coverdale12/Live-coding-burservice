@@ -19,11 +19,14 @@
   }
 }
 .loading{
-  display: flex;
   justify-content:  center;
   margin: auto;
+  text-align: center;
   font-size: 3rem;
   animation: loading-animation 2s linear infinite;
+  @media screen and (width < 48.75rem) {
+    font-size: clamp(2rem, 6.15vw ,3rem);
+  }
   &::after{
     content: ".";
     animation: loading-animation 2s linear infinite;
