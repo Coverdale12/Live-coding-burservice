@@ -35,7 +35,7 @@ function ProjectContent({ id }: { id: string }) {
     if (data) {
       setSites(data);
     }
-  }, [data, setSites]);
+  }, [data]);
 
   if (isLoading) return <Loading>Загрузка данных о месторождении</Loading>
   if (error) return <ErrorComponent>{error}</ErrorComponent>

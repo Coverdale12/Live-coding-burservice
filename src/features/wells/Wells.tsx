@@ -8,6 +8,7 @@ import styles from "./WellsStyle.module.scss"
 
 
 import EventsCard from "@features/events/Events"
+import { useSitesContext } from "@pages/ProjectsPage/SitesContext/SitesProvider"
 
 
 export interface Wells {
@@ -31,23 +32,24 @@ function EventsList({ wellId }: { wellId: string }) {
       <ul className={styles.card__list}>
         {data?.length ? data.map((el, index) => (
           <EventsCard dataEvents={el} key={index} />
-        )):"отсутствуют"}
+        )) : "отсутствуют"}
       </ul>
     </>
 
   )
 }
 
-type WellsExtend = Wells & {
-  siteName?: string;
-}
 
-export default function WellsCard({ wellsData }: { wellsData: WellsExtend}) {
-  const { wellId, spudDate, reason, wellCommonName, siteName } = wellsData
+export default function WellsCard({ wellsData }: { wellsData: Wells }) {
+  const { sites } = useSitesContext();
+  const { wellId, spudDate, reason, wellCommonName, siteId } = wellsData
+ 
+  
+  // const currentSite = sites.find((el) => el.siteId === siteId);
 
   return (
     <article className={styles.card} id={wellId}>
-      <p className={styles.card__param}>Куст: {siteName}</p>
+      {/* <p className={styles.card__param}>Куст: {currentSite ? currentSite.siteName : "Неизвестный куст"}</p> */}
       <p className={styles.card__param}>Скважина: {wellCommonName}</p>
       <p className={styles.card__param}>Направление: {reason}</p>
       {spudDate && <p className={styles.card__param}>Дата забуривания: {spudDate}</p>}

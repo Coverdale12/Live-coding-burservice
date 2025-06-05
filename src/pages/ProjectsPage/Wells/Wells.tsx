@@ -105,7 +105,7 @@ const StyledCarousel = styled.div`
   }`
 
 export default function Wells() {
-  const { sitesId, sites } = useSitesContext();
+  const { sitesId } = useSitesContext();
 
   const isEnabled = Boolean(
     sitesId &&
