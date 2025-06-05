@@ -1,4 +1,4 @@
-import { useFetchEvents } from "@features/events/api/fetchEvents"
+import { useFetchEvents } from "@entities/events/api/fetchEvents"
 
 
 import Loading from "@shared/loading/Loading"
@@ -7,7 +7,7 @@ import ErrorComponent from "@shared/error/ErrorComponent"
 import styles from "./WellsStyle.module.scss"
 
 
-import EventsCard from "@features/events/Events"
+import EventsCard from "@entities/events/Events"
 import { useSitesContext } from "@pages/ProjectsPage/SitesContext/SitesProvider"
 
 
@@ -19,6 +19,10 @@ export interface Wells {
   wellCommonName: string,
 }
 
+
+interface WellsCardProps {
+  wellsData: Wells;
+}
 
 function EventsList({ wellId }: { wellId: string }) {
   const { data, error, isLoading } = useFetchEvents(wellId);
@@ -40,7 +44,7 @@ function EventsList({ wellId }: { wellId: string }) {
 }
 
 
-export default function WellsCard({ wellsData }: { wellsData: Wells }) {
+export default function WellsCard({ wellsData }: WellsCardProps ) {
   const { sites } = useSitesContext();
   const { wellId, spudDate, reason, wellCommonName, siteId } = wellsData
  

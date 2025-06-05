@@ -1,6 +1,8 @@
-import { useFetchWells } from "@features/wells/api/fetchWells";
+import { useFetchWells } from "@entities/wells/api/fetchWells";
 import { useSitesContext } from "../SitesContext/SitesProvider";
-import WellsCard from "@features/wells/Wells";
+import WellsCard from "@entities/wells/Wells";
+
+
 
 import ErrorComponent from "@shared/error/ErrorComponent";
 import Loading from "@shared/loading/Loading";
@@ -106,12 +108,10 @@ const StyledCarousel = styled.div`
 
 export default function Wells() {
   const { sitesId } = useSitesContext();
-
   const isEnabled = Boolean(
     sitesId &&
     (typeof sitesId === 'string' ? sitesId.trim() : sitesId.length > 0)
   );
-
   const { data, error, isLoading } = useFetchWells(sitesId ?? "", {
     enabled: isEnabled,
   });
@@ -135,6 +135,9 @@ export default function Wells() {
             modules={[Pagination, Navigation]}
             spaceBetween={50}
             slidesPerView={1}
+            observer={true}
+            observeParents={true}
+            resizeObserver={true}
             pagination={{ clickable: true }}
             breakpoints={{
               640: {
@@ -146,7 +149,9 @@ export default function Wells() {
             }}
             navigation> {data?.map((el, index) => (
               <SwiperSlide>
-                <WellsCard wellsData={el} key={index} />
+                <WellsCard
+                  wellsData={el}
+                  key={index}/>
               </SwiperSlide>
             ))}
           </Swiper>}

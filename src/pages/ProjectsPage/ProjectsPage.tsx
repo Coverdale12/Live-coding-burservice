@@ -1,4 +1,4 @@
-import ProjectsList from "@features/projects/ProjectsList"
+import ProjectsList from "@entities/projects/ProjectsList"
 import styles from "./Project.module.scss"
 
 

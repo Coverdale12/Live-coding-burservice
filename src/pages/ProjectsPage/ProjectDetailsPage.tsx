@@ -3,7 +3,7 @@ import Wells from "./Wells/Wells";
 
 import styles from "./Project.module.scss"
 
-import { useFetchSites } from "@features/sites/api/fetchSites";
+import { useFetchSites } from "@entities/sites/api/fetchSites";
 import { useEffect } from "react";
 
 import { useSitesContext, SitesProvider } from "./SitesContext/SitesProvider";

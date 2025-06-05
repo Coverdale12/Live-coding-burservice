@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect } from "react";
 import { useContext, useState } from "react";
-import { Site } from "@features/sites/Site";
+import { Site } from "@entities/sites/Site";
 
 
 type SitesContextType = {
