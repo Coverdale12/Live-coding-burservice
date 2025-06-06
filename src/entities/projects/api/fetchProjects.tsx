@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchData } from '@shared/api/api';
 
-interface Project {
+export interface Project {
   projectId: string,
   projectName: string
 }

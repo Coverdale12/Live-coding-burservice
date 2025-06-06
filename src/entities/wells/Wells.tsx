@@ -4,11 +4,12 @@ import { useFetchEvents } from "@entities/events/api/fetchEvents"
 import Loading from "@shared/loading/Loading"
 import ErrorComponent from "@shared/error/ErrorComponent"
 
+import { Button } from "@mui/material"
+import { useWellsContext } from "@entities/wells/context/WellsContext"
 import styles from "./WellsStyle.module.scss"
 
 
 import EventsCard from "@entities/events/Events"
-import { useSitesContext } from "@pages/ProjectsPage/SitesContext/SitesProvider"
 
 
 export interface Wells {
@@ -44,15 +45,18 @@ function EventsList({ wellId }: { wellId: string }) {
 }
 
 
-export default function WellsCard({ wellsData }: WellsCardProps ) {
-  const { sites } = useSitesContext();
+export default function WellsCard({ wellsData }: WellsCardProps) {
+  const { setCurrentWellId } = useWellsContext();
   const { wellId, spudDate, reason, wellCommonName, siteId } = wellsData
- 
-  
+
+
   // const currentSite = sites.find((el) => el.siteId === siteId);
+  const handleClick = () => {
+    setCurrentWellId(wellId);
+  };
 
   return (
-    <article className={styles.card} id={wellId}>
+    <article className={styles.card} id={wellId} onClick={handleClick}>
       {/* <p className={styles.card__param}>Куст: {currentSite ? currentSite.siteName : "Неизвестный куст"}</p> */}
       <p className={styles.card__param}>Скважина: {wellCommonName}</p>
       <p className={styles.card__param}>Направление: {reason}</p>
@@ -60,6 +64,10 @@ export default function WellsCard({ wellsData }: WellsCardProps ) {
       <div className={styles.card__footer}>
         <EventsList wellId={wellId} />
       </div>
+      <Button size="large" sx={{
+        backgroundColor: "white",
+        margin: "1rem",
+      }}>Отчёты</Button>
     </article>
   )
 }

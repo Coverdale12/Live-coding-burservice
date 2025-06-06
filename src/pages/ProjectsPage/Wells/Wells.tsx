@@ -1,5 +1,5 @@
 import { useFetchWells } from "@entities/wells/api/fetchWells";
-import { useSitesContext } from "../SitesContext/SitesProvider";
+import { useSitesContext } from "../../../entities/sites/context/SitesContext";
 import WellsCard from "@entities/wells/Wells";
 
 
