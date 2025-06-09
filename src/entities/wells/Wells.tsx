@@ -9,7 +9,8 @@ import { useWellsContext } from "@entities/wells/context/WellsContext"
 import styles from "./WellsStyle.module.scss"
 
 
-import EventsCard from "@entities/events/Events"
+import EventsCard from "@entities/events/Event"
+import { useSitesContext } from "@entities/sites/context/SitesContext"
 
 
 export interface Wells {
@@ -47,10 +48,11 @@ function EventsList({ wellId }: { wellId: string }) {
 
 export default function WellsCard({ wellsData }: WellsCardProps) {
   const { setCurrentWellId } = useWellsContext();
+  // const { sites } = useSitesContext();
   const { wellId, spudDate, reason, wellCommonName, siteId } = wellsData
-
-
   // const currentSite = sites.find((el) => el.siteId === siteId);
+
+
   const handleClick = () => {
     setCurrentWellId(wellId);
   };

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Project } from "../api/fetchProjects";
+import { Project } from "../Project";
 
 
 const initialState = { 

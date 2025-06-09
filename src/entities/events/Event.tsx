@@ -1,9 +1,13 @@
 import styles from "./Events.module.scss"
-import { Events } from "./api/fetchEvents"
 
 
+export interface Event {
+  wellId: string,
+  eventId: string,
+  eventCode: string,
+}
 
-export default function EventsCard({ dataEvents }: { dataEvents: Events }) {
+export default function EventsCard({ dataEvents }: { dataEvents: Event }) {
   const {wellId, eventCode, eventId} = dataEvents;
 
   return (

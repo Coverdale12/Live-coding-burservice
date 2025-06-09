@@ -1,10 +1,8 @@
-
-import AppRoutes from './router/routes'
+import AppRouter from "./routing/AppRouter"
 
 function App() {
-
   return (
-    <AppRoutes />
+    <AppRouter />
   )
 }
 

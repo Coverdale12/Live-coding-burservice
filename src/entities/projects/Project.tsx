@@ -3,6 +3,13 @@ import { Button } from "@mui/material"
 import { Link } from 'react-router-dom'
 
 
+
+
+export interface Project {
+  projectId: string,
+  projectName: string
+}
+
 type ProjectProps = {
   name: string,
   id: string,

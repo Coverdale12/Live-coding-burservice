@@ -3,7 +3,7 @@ import Wells from "./Wells/Wells";
 
 import styles from "./Project.module.scss"
 
-import { Project } from "@entities/projects/api/fetchProjects";
+import { Project } from "@entities/projects/Project";
 
 
 import { useFetchSites } from "@entities/sites/api/fetchSites";
@@ -24,9 +24,8 @@ export default function ProjectDetailsPage() {
   const { id } = useParams<{ id: string }>();
 
   const project: Project = useAppSelector((state) => state.project.project);
+  
 
-
-  console.log(project)
   return (
     <>
       <WellsProvider>
@@ -40,7 +39,7 @@ export default function ProjectDetailsPage() {
 }
 
 function ProjectContent({ id }: { id: string }) {
-  const { setSites } = useSitesContext();
+  const { setSites, sites } = useSitesContext();
   const { data, error, isLoading } = useFetchSites(id);
 
   useEffect(() => {
@@ -48,7 +47,7 @@ function ProjectContent({ id }: { id: string }) {
       setSites(data);
     }
   }, [data]);
-
+  
   if (isLoading) return <Loading>Загрузка данных о месторождении</Loading>
   if (error) return <ErrorComponent>{error}</ErrorComponent>
 

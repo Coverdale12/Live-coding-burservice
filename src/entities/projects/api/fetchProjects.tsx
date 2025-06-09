@@ -1,11 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchData } from '@shared/api/api';
+import { Project } from '../Project';
 
-export interface Project {
-  projectId: string,
-  projectName: string
-}
 
 export const fetchProjects = async () =>
   fetchData<Project[]>('CdProjectSource', {}, ['projectId', 'projectName']);

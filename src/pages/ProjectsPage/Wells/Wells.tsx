@@ -117,9 +117,7 @@ export default function Wells() {
   });
 
   if (!isEnabled) return <Loading>Ожидание данных</Loading>
-
   if (error) return <ErrorComponent>{error}</ErrorComponent>
-
   if (isLoading) return <Loading>Загрузка скважин</Loading>
 
 

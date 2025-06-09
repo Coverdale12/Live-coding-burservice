@@ -15,6 +15,8 @@ const ProjectsList = () => {
 
   const dispatch = useDispatch();
 
+
+
   if (error) return <ErrorComponent>{error}</ErrorComponent>
   if (isLoading) return <Loading>Загрузка месторождений</Loading>
   return (
