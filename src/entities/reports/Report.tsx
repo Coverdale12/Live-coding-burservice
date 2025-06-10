@@ -1,4 +1,4 @@
-import styles from "./Project.module.scss"
+import styles from "./Report.module.scss"
 
 
 export type Report = {
@@ -15,16 +15,24 @@ export type Report = {
 }
 
 export default function Report({ dataReport }: { dataReport: Report }) {
-  const { 
+  const {
     reportAlias, reportNo, dateReport,
     eventId, wellId, wellboreId,
-    reportJournalId, description, entityType, eventCode 
+    reportJournalId, description, entityType, eventCode
   } = dataReport;
   return (
     <article className={styles.card}>
-      <p className={styles.card__param}>
-        {reportAlias}
-      </p>
+      <h3 className={styles.card__title}>
+        {reportJournalId}
+      </h3>
+      <div className={styles.card__body}>
+        <p className={styles.card__param}>
+          {reportAlias}
+        </p>
+        {description && <p className={styles.card__param}>
+          Описание: {description}
+        </p>}
+      </div>
     </article>
   )
 }

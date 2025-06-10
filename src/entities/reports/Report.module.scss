@@ -1,0 +1,11 @@
+
+.card{
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 145, 0);
+  border-radius: 0.7rem;
+  padding-inline: 1rem;
+  &__title{
+    margin-right: auto;
+  }
+}
