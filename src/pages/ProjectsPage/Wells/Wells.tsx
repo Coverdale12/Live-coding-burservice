@@ -107,7 +107,8 @@ const StyledCarousel = styled.div`
   }`
 
 export default function Wells() {
-  const { sitesId } = useSitesContext();
+  const { sitesId, sites } = useSitesContext();
+  console.log(sites)
   const isEnabled = Boolean(
     sitesId &&
     (typeof sitesId === 'string' ? sitesId.trim() : sitesId.length > 0)
@@ -148,8 +149,9 @@ export default function Wells() {
             navigation> {data?.map((el, index) => (
               <SwiperSlide>
                 <WellsCard
+                  siteName={sites.find(site => site.siteId === el.siteId)?.siteName || undefined}
                   wellsData={el}
-                  key={index}/>
+                  key={index} />
               </SwiperSlide>
             ))}
           </Swiper>}
@@ -160,7 +162,8 @@ export default function Wells() {
       <ul className={styles.wells__list}>
         {data && data?.map((el, index) => (
           <li className="wells__item" key={index}>
-            <WellsCard wellsData={el} />
+            <WellsCard wellsData={el}
+            siteName={sites.find(site => site.siteId === el.siteId)?.siteName || undefined} />
           </li>
         ))}
       </ul>

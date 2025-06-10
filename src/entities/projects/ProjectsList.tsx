@@ -1,6 +1,6 @@
 import { useFetchProjects } from "./api/fetchProjects";
 import Project from "./Project"
-
+import {Project as ProjectType} from "./Project"
 import Loading from "@shared/loading/Loading";
 import ErrorComponent from "@shared/error/ErrorComponent";
 
@@ -15,14 +15,16 @@ const ProjectsList = () => {
 
   const dispatch = useDispatch();
 
-
+  function handlerClick(el: ProjectType){
+    dispatch(setProject(el))
+  }
 
   if (error) return <ErrorComponent>{error}</ErrorComponent>
   if (isLoading) return <Loading>Загрузка месторождений</Loading>
   return (
     <ul className={styles.list}>
       {data?.map((el, index) => (
-        <li className={styles.item} key={index} onClick={() => dispatch(setProject(el))}>
+        <li className={styles.item} key={index} onClick={() => handlerClick(el)}>
           <Project name={el.projectName} id={el.projectId} />
         </li>
       ))}

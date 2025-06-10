@@ -47,9 +47,12 @@ function ProjectContent({ id }: { id: string }) {
       setSites(data);
     }
   }, [data]);
-  
-  if (isLoading) return <Loading>Загрузка данных о месторождении</Loading>
-  if (error) return <ErrorComponent>{error}</ErrorComponent>
 
+  if (isLoading) return <Loading>Загрузка данных о месторождении</Loading>;
+
+  if (error)  return <ErrorComponent>{error}</ErrorComponent>;
+
+  // Ждём, пока данные будут записаны в контекст
+  if (!sites || sites.length === 0) return <Loading>Инициализация</Loading>;
   return <Wells />;
 }

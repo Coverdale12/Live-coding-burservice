@@ -6,7 +6,6 @@ type SitesContextType = {
   sites: Site[];
   setSites: (value: Site[]) => void;
   sitesId: string[] | string;
-  setSitesId: (value: string[]) => void;
 }
 
 export const SitesContext = createContext<SitesContextType | undefined>(undefined);

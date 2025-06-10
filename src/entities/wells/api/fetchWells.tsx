@@ -24,9 +24,10 @@ export const fetchWells = async (siteId: string | string[]) => {
 }
 export const useFetchWells = (siteId: string | string[], options = {}) => {
   return useQuery<Wells[]>({
-    queryKey: ['wells'],
+    queryKey: ['wells', siteId],
     queryFn: () => fetchWells(siteId),
     ...options,
+    enabled: Boolean(siteId),
   });
 }
 

@@ -10,7 +10,7 @@ import styles from "./WellsStyle.module.scss"
 
 
 import EventsCard from "@entities/events/Event"
-import { useSitesContext } from "@entities/sites/context/SitesContext"
+
 
 
 export interface Wells {
@@ -24,6 +24,7 @@ export interface Wells {
 
 interface WellsCardProps {
   wellsData: Wells;
+  siteName: string | undefined
 }
 
 function EventsList({ wellId }: { wellId: string }) {
@@ -46,7 +47,7 @@ function EventsList({ wellId }: { wellId: string }) {
 }
 
 
-export default function WellsCard({ wellsData }: WellsCardProps) {
+export default function WellsCard({ wellsData, siteName }: WellsCardProps) {
   const { setCurrentWellId } = useWellsContext();
   // const { sites } = useSitesContext();
   const { wellId, spudDate, reason, wellCommonName, siteId } = wellsData
@@ -59,7 +60,7 @@ export default function WellsCard({ wellsData }: WellsCardProps) {
 
   return (
     <article className={styles.card} id={wellId} onClick={handleClick}>
-      {/* <p className={styles.card__param}>Куст: {currentSite ? currentSite.siteName : "Неизвестный куст"}</p> */}
+      <p className={styles.card__param}>Куст: {siteName ? siteName : "Неизвестный куст"}</p>
       <p className={styles.card__param}>Скважина: {wellCommonName}</p>
       <p className={styles.card__param}>Направление: {reason}</p>
       {spudDate && <p className={styles.card__param}>Дата забуривания: {spudDate}</p>}
