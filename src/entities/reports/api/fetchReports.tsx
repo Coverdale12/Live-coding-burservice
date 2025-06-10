@@ -17,7 +17,7 @@ export const fetchReports = async (wellId: string) =>
 
 export const useFetchReports = (wellId: string) => {
   return useQuery<Report[]>({
-    queryKey: ['sites'],
+    queryKey: ['sites', wellId],
     queryFn: () => fetchReports(wellId),
   });
 }

@@ -1,7 +1,7 @@
 import { useFetchWells } from "@entities/wells/api/fetchWells";
-import { useSitesContext } from "../../../entities/sites/context/SitesContext";
-import WellsCard from "@entities/wells/Wells";
-
+import { useSitesContext } from "@entities/sites/context/SitesContext";
+import WellsCard, { Wells } from "@entities/wells/Wells";
+import { useState, useCallback, useEffect } from "react";
 
 
 import ErrorComponent from "@shared/error/ErrorComponent";
@@ -14,8 +14,10 @@ import { Pagination, Navigation } from "swiper/modules";
 import styled from "styled-components";
 
 import styles from "../Project.module.scss"
+import { Site } from "@entities/sites/Site";
 
-
+import { Swiper as SwiperType } from 'swiper';
+import { useWellsContext } from "@entities/wells/context/WellsContext";
 
 const StyledCarousel = styled.div`
   .swiper {
@@ -106,9 +108,68 @@ const StyledCarousel = styled.div`
     }
   }`
 
-export default function Wells() {
+function WellsList({ data, sites }: { data: Wells[], sites: Site[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { setCurrentWellId } = useWellsContext();
+
+  // Устанавливаем первый wellId сразу при монтировании
+  useEffect(() => {
+    if (data?.length > 0) {
+      setCurrentWellId(data[0].wellId);
+    }
+  }, [data, setCurrentWellId]);
+
+  const handleChange = useCallback((swiper: SwiperType) => {
+    requestAnimationFrame(() => {
+      setActiveIndex(swiper.activeIndex);
+      setCurrentWellId(data[swiper.activeIndex].wellId);
+    });
+  }, [data, setCurrentWellId]);
+
+  if (!data) return
+  if (data?.length >= 3) return (
+    <>
+      <h3 className={styles["wells__title-list"]}>
+        Найденно {data.length} скважин
+      </h3>
+      <ul className={styles.wells__list}>
+        {data && <Swiper
+          modules={[Pagination, Navigation]}
+          spaceBetween={50}
+          speed={300}
+          slidesPerView={1}
+          observer={true}
+          onSlideChange={handleChange}
+          resistanceRatio={0}
+          observeParents={true}
+          resizeObserver={true}
+          pagination={{ clickable: true }}
+          navigation> {data?.map((el, index) => (
+            <SwiperSlide>
+              <WellsCard
+                siteName={sites.find(site => site.siteId === el.siteId)?.siteName || undefined}
+                wellsData={el}
+                key={`${index}-${el.wellId}`} />
+            </SwiperSlide>
+          ))}
+        </Swiper>}
+      </ul>
+    </>
+  )
+  return (
+    <ul className={styles.wells__list}>
+      {data && data?.map((el, index) => (
+        <li className="wells__item" key={index}>
+          <WellsCard wellsData={el}
+            siteName={sites.find(site => site.siteId === el.siteId)?.siteName || undefined} />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default function WellsSection() {
   const { sitesId, sites } = useSitesContext();
-  console.log(sites)
   const isEnabled = Boolean(
     sitesId &&
     (typeof sitesId === 'string' ? sitesId.trim() : sitesId.length > 0)
@@ -121,59 +182,11 @@ export default function Wells() {
   if (error) return <ErrorComponent>{error}</ErrorComponent>
   if (isLoading) return <Loading>Загрузка скважин</Loading>
 
-
-  function WellsList() {
-    if (!data) return
-    if (data?.length >= 3) return (
-      <>
-        <h3 className={styles["wells__title-list"]}>
-          Найденно {data.length} скважин
-        </h3>
-        <ul className={styles.wells__list}>
-          {data && <Swiper
-            modules={[Pagination, Navigation]}
-            spaceBetween={50}
-            slidesPerView={1}
-            observer={true}
-            observeParents={true}
-            resizeObserver={true}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              }
-            }}
-            navigation> {data?.map((el, index) => (
-              <SwiperSlide>
-                <WellsCard
-                  siteName={sites.find(site => site.siteId === el.siteId)?.siteName || undefined}
-                  wellsData={el}
-                  key={index} />
-              </SwiperSlide>
-            ))}
-          </Swiper>}
-        </ul>
-      </>
-    )
-    return (
-      <ul className={styles.wells__list}>
-        {data && data?.map((el, index) => (
-          <li className="wells__item" key={index}>
-            <WellsCard wellsData={el}
-            siteName={sites.find(site => site.siteId === el.siteId)?.siteName || undefined} />
-          </li>
-        ))}
-      </ul>
-    )
-  }
   return (
     <StyledCarousel>
       <section className="wells">
         <h2 className={styles.title}>Скважины</h2>
-        <WellsList />
+        <WellsList data={data as Wells[]} sites={sites} />
       </section >
     </StyledCarousel>
   );

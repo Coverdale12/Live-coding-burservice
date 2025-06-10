@@ -9,7 +9,7 @@ export const fetchSites = async (projectId: string) =>
 
 export const useFetchSites = (projectId: string) => {
   return useQuery<Site[]>({
-    queryKey: ['sites'],
+    queryKey: ['sites', projectId],
     queryFn: () => fetchSites(projectId),
   });
 }

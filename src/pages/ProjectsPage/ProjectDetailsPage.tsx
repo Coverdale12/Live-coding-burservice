@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom"
-import Wells from "./Wells/Wells";
 
 import styles from "./Project.module.scss"
 
@@ -17,6 +16,8 @@ import { WellsProvider } from "@entities/wells/context/WellsProvider";
 import ErrorComponent from "@shared/error/ErrorComponent";
 import Loading from "@shared/loading/Loading";
 import { useAppSelector } from "@app/hooks";
+import WellsSection from "./Wells/Wells";
+import Reports from "./Reports/Reports";
 
 
 
@@ -24,7 +25,7 @@ export default function ProjectDetailsPage() {
   const { id } = useParams<{ id: string }>();
 
   const project: Project = useAppSelector((state) => state.project.project);
-  
+
 
   return (
     <>
@@ -50,9 +51,16 @@ function ProjectContent({ id }: { id: string }) {
 
   if (isLoading) return <Loading>Загрузка данных о месторождении</Loading>;
 
-  if (error)  return <ErrorComponent>{error}</ErrorComponent>;
+  if (error) return <ErrorComponent>{error}</ErrorComponent>;
+
+  if (data?.length === 0) return <div className={styles.empty}>Информация о месторождении отсутствует!</div>
 
   // Ждём, пока данные будут записаны в контекст
   if (!sites || sites.length === 0) return <Loading>Инициализация</Loading>;
-  return <Wells />;
+  return (
+    <>
+      <WellsSection />
+      <Reports />
+    </>
+  );
 }
