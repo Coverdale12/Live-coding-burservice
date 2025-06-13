@@ -1,8 +1,8 @@
 import { useFetchProjects } from "./api/fetchProjects";
 import Project from "./Project"
 import {Project as ProjectType} from "./Project"
-import Loading from "@shared/loading/Loading";
-import ErrorComponent from "@shared/error/ErrorComponent";
+import Loading from "@shared/ui/loading/Loading";
+import ErrorComponent from "@shared/ui/error/ErrorComponent";
 
 import { useDispatch } from "react-redux"
 import {setProject} from "@entities/projects/slice/ProjectSlice"

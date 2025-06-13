@@ -13,12 +13,13 @@ import { useSitesContext } from "@entities/sites/context/SitesContext";
 import { WellsProvider } from "@entities/wells/context/WellsProvider";
 
 
-import ErrorComponent from "@shared/error/ErrorComponent";
-import Loading from "@shared/loading/Loading";
+import ErrorComponent from "@shared/ui/error/ErrorComponent";
+import Loading from "@shared/ui/loading/Loading";
 import { useAppSelector } from "@app/hooks";
 import WellsSection from "./Wells/Wells";
 import Reports from "./Reports/Reports";
 
+import Title from "@shared/ui/title/Title";
 
 
 export default function ProjectDetailsPage() {
@@ -28,21 +29,19 @@ export default function ProjectDetailsPage() {
 
 
   return (
-    <>
-      <WellsProvider>
-        <SitesProvider>
-          <h1 className={styles.title}>Месторождение {project.projectName ? project.projectName : ""}</h1>
-          <ProjectContent id={id as string} />
-        </SitesProvider>
-      </WellsProvider>
-    </>
+    <WellsProvider>
+      <SitesProvider>
+        <Title className={styles.title}>Месторождение {project.projectName ? project.projectName : ""}</Title>
+        <ProjectContent id={id as string} />
+      </SitesProvider>
+    </WellsProvider>
   )
 }
 
 function ProjectContent({ id }: { id: string }) {
   const { setSites, sites } = useSitesContext();
   const { data, error, isLoading } = useFetchSites(id);
-
+  
   useEffect(() => {
     if (data) {
       setSites(data);

@@ -4,8 +4,8 @@ import WellsCard, { Wells } from "@entities/wells/Wells";
 import { useState, useCallback, useEffect } from "react";
 
 
-import ErrorComponent from "@shared/error/ErrorComponent";
-import Loading from "@shared/loading/Loading";
+import ErrorComponent from "@shared/ui/error/ErrorComponent";
+import Loading from "@shared/ui/loading/Loading";
 
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -15,7 +15,7 @@ import styled from "styled-components";
 
 import styles from "../Project.module.scss"
 import { Site } from "@entities/sites/Site";
-
+import Title from "@shared/ui/title/Title";
 import { Swiper as SwiperType } from 'swiper';
 import { useWellsContext } from "@entities/wells/context/WellsContext";
 
@@ -185,7 +185,7 @@ export default function WellsSection() {
   return (
     <StyledCarousel>
       <section className="wells">
-        <h2 className={styles.title}>Скважины</h2>
+        <Title title="h2">Скважины</Title>
         <WellsList data={data as Wells[]} sites={sites} />
       </section >
     </StyledCarousel>

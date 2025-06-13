@@ -4,7 +4,7 @@ import Layout from '../layout/Layout';
 import HomePage from '@pages/HomePage/HomePage';
 
 import { aboutUsPageRoute } from '@pages/AboutUsPage/routes';
-import { projectsPageRoute } from '@pages/ProjectsPage/routes';
+import { projectsPageRoute } from '@pages/ProjectDetailPage/routes';
 
 
 const router = createBrowserRouter([

@@ -1,13 +1,12 @@
 import ProjectsList from "@entities/projects/ProjectsList"
-import styles from "./Project.module.scss"
-
+import Title from "@shared/ui/title/Title"
 
 export default function ProjectsPage(){
   return(
     <>
       <section className="hero">
         <div className="hero__wrapper">
-          <h1 className={styles.title}>Месторождения</h1>
+          <Title>Месторождения</Title>
           <ProjectsList />
         </div>
       </section>

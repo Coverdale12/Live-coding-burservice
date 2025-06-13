@@ -5,8 +5,8 @@ import styles from "./SiteStyles.module.scss"
 
 
 
-import Loading from "@shared/loading/Loading";
-import ErrorComponent from "@shared/error/ErrorComponent";
+import Loading from "@shared/ui/loading/Loading";
+import ErrorComponent from "@shared/ui/error/ErrorComponent";
 
 
 type SitesListProps = {

@@ -1,8 +1,8 @@
 import { useFetchEvents } from "@entities/events/api/fetchEvents"
 
 
-import Loading from "@shared/loading/Loading"
-import ErrorComponent from "@shared/error/ErrorComponent"
+import Loading from "@shared/ui/loading/Loading"
+import ErrorComponent from "@shared/ui/error/ErrorComponent"
 
 import { Button } from "@mui/material"
 import { useWellsContext } from "@entities/wells/context/WellsContext"
